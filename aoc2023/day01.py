@@ -1,3 +1,4 @@
+import time
 from typing import Tuple
 import re
 
@@ -58,4 +59,6 @@ def main(data: list[str]):
     print(sum)
 
 
+start_time = time.time()
 main(data)
+print("--- %s ms ---" % ((time.time() - start_time) * 1000))
