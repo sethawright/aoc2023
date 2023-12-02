@@ -6,7 +6,6 @@ data: list[str] = open("aoc2023/inputs/day01.txt", "r").read().splitlines()
 
 word_map = {
     "one": 1,
-    "twone": 1,
     "two": 2,
     "three": 3,
     "four": 4,
