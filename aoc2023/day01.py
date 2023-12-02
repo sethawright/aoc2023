@@ -2,7 +2,6 @@ import time
 from typing import Tuple
 import re
 
-LIMIT = 1000
 data: list[str] = open("aoc2023/inputs/day01.txt", "r").read().splitlines()
 
 word_map = {
@@ -16,10 +15,17 @@ word_map = {
     "eight": 8,
     "nine": 9,
 }
+
+# save time building map
+# originally typecast but this is cleaner (maybe faster?)
 for i in range(1, 10):
     word_map[str(i)] = i
 
+# match digits and words
 r_forward = r"(\d|one|two|three|four|five|six|seven|eight|nine)"
+
+# used match last digit backwards then flip it
+# did this to avoid splitting the string
 r_backward = r"(\d|enin|thgie|neves|xis|evif|ruof|eerht|owt|eno)"
 
 
@@ -33,6 +39,7 @@ def find_first_last_digit(line: str) -> Tuple[int, int]:
     if not match_forward or not match_backward:
         raise ValueError("No match found for: " + line)
 
+    # grab first matches
     first = match_forward.group(0)
     last = match_backward.group(0)
     last = last[::-1]
@@ -40,6 +47,7 @@ def find_first_last_digit(line: str) -> Tuple[int, int]:
     if not first or not last:
         raise ValueError("Missing matching group" + line)
 
+    # get the digit value
     start_digit = word_map.get(first)
     end_digit = word_map.get(last)
 
